@@ -1,50 +1,80 @@
 #include <iostream>
 #include <cmath>
 
-int month{};
-int day{};
-int year{};
+int Bmonth{};
+int Bday{};
+int Byear{};
+
+int currentMonth{};
+int currentDay{};
+int currentYear{};
 
 
 void validDate()
 {
-	
-	std::cin >> month;
-	std::cin.ignore();
-	std::cin >> day;
-	std::cin >> year;
-
-	if (1900 <= year <= 2025)
+	bool invalidBday = true;
+	bool invalidCurrentDay = true;
+	while (invalidBday)
 	{
-		if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+		std::cout << "\nEnter your birthday (Month first, then Day, then Year)\n";
+		std::cin >> Bmonth;
+		std::cin.ignore();
+		std::cin >> Bday;
+		std::cin >> Byear;
+
+		if (1900 <= Byear <= 2025)
 		{
-			if (day > 31 || day < 1)
+			if (Bmonth == 1 || Bmonth == 3 || Bmonth == 5 || Bmonth == 7 || Bmonth == 8 || Bmonth == 10 || Bmonth == 12)
 			{
-				std::cout << "That is not a valid date\n";
+				if (Bday > 31 || Bday < 1)
+				{
+					std::cout << "That is not a valid date\n";
+					
+				}
+				else
+				{
+					invalidBday = false;
+				}
 			}
-		}
-		else if (month == 2)
-		{
-			if (year % 4 == 0)
+			else if (Bmonth == 2)
 			{
-				if (day > 29 || day < 1)
+				if (Byear % 4 == 0)
+				{
+					if (Bday > 29 || Bday < 1)
+					{
+						std::cout << "That is not a valid date\n";
+					}
+					else
+					{
+						invalidBday = false;
+					}
+				}
+				else if (Byear % 4 != 0)
+				{
+					if (Bday > 28 || Bday < 1)
+					{
+						std::cout << "That is not a valid date\n";
+					}
+					else
+					{
+						invalidBday = false;
+					}
+				}
+			}
+			else if (Bmonth == 4 || Bmonth == 6 || Bmonth == 9 || Bmonth == 11)
+			{
+				if (Bday > 30 || Bday < 1)
 				{
 					std::cout << "That is not a valid date\n";
 				}
-			}
-			else if (year % 4 != 0)
-			{
-				if (day > 28 || day < 1)
+				else
 				{
-					std::cout << "That is not a valid date\n";
+					invalidBday = false;
 				}
 			}
-		}
-		else if (month == 4 || month == 6 || month == 9 || month == 11)
-		{
-			if (day > 30 || day < 1)
+			else
 			{
-				std::cout << "That is not a valid date\n";
+				std::cout << "That is not a valid date \n";
 			}
 		}
 		else
@@ -52,8 +82,91 @@ void validDate()
 			std::cout << "That is not a valid date \n";
 		}
 	}
-	else
+	while (invalidCurrentDay)
 	{
-		std::cout << "That is not a valid date \n";
+		std::cout << "\nEnter the current date (Month first, then Day, then Year)\n";
+		std::cin >> currentMonth;
+		std::cin.ignore();
+		std::cin >> currentDay;
+		std::cin >> currentYear;
+
+		if (1900 <= currentYear <= 2025)
+		{
+			if (currentMonth == 1 || currentMonth == 3 || currentMonth == 5 || currentMonth == 7 || currentMonth == 8 || currentMonth == 10 || currentMonth == 12)
+			{
+				if (currentDay > 31 || currentDay < 1)
+				{
+					std::cout << "That is not a valid date\n";
+
+				}
+				else
+				{
+					invalidCurrentDay = false;
+				}
+			}
+			else if (currentMonth == 2)
+			{
+				if (currentYear % 4 == 0)
+				{
+					if (currentDay > 29 || currentDay < 1)
+					{
+						std::cout << "That is not a valid date\n";
+					}
+					else
+					{
+						invalidCurrentDay = false;
+					}
+				}
+				else if (currentYear % 4 != 0)
+				{
+					if (currentDay > 28 || currentDay < 1)
+					{
+						std::cout << "That is not a valid date\n";
+					}
+					else
+					{
+						invalidCurrentDay = false;
+					}
+				}
+			}
+			else if (currentMonth == 4 || currentMonth == 6 || currentMonth == 9 || currentMonth == 11)
+			{
+				if (currentDay > 30 || currentDay < 1)
+				{
+					std::cout << "That is not a valid date\n";
+				}
+				else
+				{
+					invalidCurrentDay = false;
+				}
+			}
+			else
+			{
+				std::cout << "That is not a valid date \n";
+			}
+		}
+		else
+		{
+			std::cout << "That is not a valid date \n";
+		}
+	}
+}
+
+void ageCalculator()
+{
+	int age = currentYear - Byear;
+
+	if (currentMonth == Bmonth && currentDay <= Bday)
+	{
+		age--;
+	}
+	else if (currentMonth < Bmonth)
+	{
+		age--;
+	}
+	std::cout << "\nYour age is:  " << age << "\n";
+	if (Bmonth == 2 && Bday == 29)
+	{
+		std::cout << "Thats rough buddy... your age is actually:   " << age / 4 << "\n";
 	}
 }
